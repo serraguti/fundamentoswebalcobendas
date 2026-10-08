@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function sumarNumeros() {
+            //recuperamos el elemento cajanumero1
+            let caja1 = document.getElementById("cajanumero1");
+            //recuperamos el elemento cajanumero2
+            let caja2 = document.getElementById("cajanumero2");
+            //recuperamos el elemento mensaje
+            let mensaje = document.getElementById("mensaje");
+            //quiero el valor de la caja1
+            let valor1 = parseInt(caja1.value);
+            //quiero el valor de la caja2
+            let valor2 = parseInt(caja2.value);
+            //sumamos los dos valores 
+            let suma = valor1 + valor2;
+            //escribimos en mensaje la suma
+            mensaje.innerText = "La suma es " + suma;
+        }
+    </script>
+</head>
+<body>
+    <h1>Sumar números</h1>
+    Número 1:
+    <input type="number" id="cajanumero1"/>
+    <br/>
+    Número 2
+    <input type="number" id="cajanumero2"/>
+    <br/>
+    <button onclick="sumarNumeros()">Sumar números</button>
+    <h3 id="mensaje"></h3>
+</body>
+</html>
