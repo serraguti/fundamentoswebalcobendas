@@ -7,7 +7,7 @@
     <script>
         function calcularDia(){
             let dia = parseInt(document.getElementById("cajadia").value)
-            let mes = parseInt(document.getElementById("cajadia").value)
+            let mes = parseInt(document.getElementById("cajames").value)
             let anyo = parseInt(document.getElementById("cajaanyo").value)
             //hacemos el calculo dependiendo del mes
             if (mes == 1){
@@ -18,38 +18,45 @@
                 anyo--;
             }
             //Multiplicar el Mes más 1 por 3 y dividirlo entre 5
-            let op1 = (mes + 1) * 3 / 5;
-            //Dividir el año entre 4
-            let op2 = anyo / 4;
+            let op1 = parseInt(((mes + 1) * 3) / 5);
+            console.log(op1)
+            //Dividir el año entre 4s
+            let op2 = parseInt(anyo / 4);
+            console.log(op2)
             //Dividir el año entre 100
-            let op3 = anyo / 100;
+            let op3 = parseInt(anyo / 100);
+            console.log(op3)
             //Dividir el año entre 400
-            let op4 = anyo / 400;
+            let op4 = parseInt(anyo / 400);
+            console.log(op4)
             //Sumar el dia, el doble del mes, el año
             // , el resultado de la operación 1, 
             // el resultado de la operación 2, 
             // menos el resultado de la operación 3 
             // más la operación 4 más 2.
             let op5 = dia + (mes * 2) + anyo + op1 + op2 - op3 + op4 + 2;
+            console.log(op5)
             //Dividir el resultado anterior entre 7
-            let op6 = op5 / 7;
+            let op6 = parseInt(op5 / 7);
+            console.log(op6);
             //Restar el número del paso 5 con el número del paso 6 por 7.
             let resultado = op5 - (op6 * 7);
+            console.log(resultado)
             let diasemana = "";
             if (resultado == 0){
                 diasemana = "SABADO";
             }else if (resultado == 1){
                 diasemana = "DOMINGO";
             }else if (resultado == 2){
-                diasemana == "LUNES";
+                diasemana = "LUNES";
             }else if (resultado == 3){
-                diasemana == "MARTES";
+                diasemana = "MARTES";
             }else if (resultado == 4){
-                diasemana == "MIERCOLES";
+                diasemana = "MIERCOLES";
             }else if (resultado == 5){
-                diasemana == "JUEVES";
+                diasemana = "JUEVES";
             }else if (resultado == 6){
-                diasemana == "VIERNES";
+                diasemana = "VIERNES";
             }
             let mensaje = document.getElementById("mensaje");
             mensaje.innerText = "El dia es " + diasemana;
