@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function evaluarMayorMenor(){
+            //recuperamos los números de caja input
+            let numero1 = parseInt(document.getElementById("cajanumero1").value)
+            //recuperamos el input cajanumero2
+            let caja2 = document.getElementById("cajanumero2");
+            //declaramos una variable numero2 para caja2
+            let numero2 = parseInt(caja2.value);
+            let numero3 = parseInt(document.getElementById("cajanumero3").value);
+            //declaramos dos variables para guardar el mayor y el menor
+            let mayor = 0;
+            let menor = 0;
+            //evaluamos que numero de los tres es el mayor
+            if (numero1 > numero2 && numero1 > numero3){
+                mayor = numero1;
+            }else if (numero2 > numero1 && numero2 > numero3){
+                mayor = numero2;                
+            }else{
+                mayor = numero3;
+            }
+            //evaluar qué número de los tres es el menor
+            if (numero1 < numero2 && numero1 < numero3){
+                menor = numero1;
+            }else if (numero2 < numero1 && numero2 < numero3){
+                menor = numero2;                
+            }else{
+                menor = numero3;
+            }
+            //recuperamos el elemento mensaje de html
+            let mensaje = document.getElementById("mensaje");
+            //escribimos en mensaje el numero mayor y el menor
+            mensaje.innerText = "Mayor: " + mayor + ", Menor: " + menor;
+        }
+    </script>
+</head>
+<body>
+    <h1>Número mayor menor</h1>
+    Número 1: <input type="number" id="cajanumero1"/>
+    <br/>
+    Número 2: <input type="number" id="cajanumero2"/>
+    <br/>
+    Número 3: <input type="number" id="cajanumero3"/>
+    <br/>
+    <button onclick="evaluarMayorMenor()">Mayor/Menor</button>
+    <h3 id="mensaje"></h3>
+</body>
+</html>
