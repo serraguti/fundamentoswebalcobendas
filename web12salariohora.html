@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function calcularDatos() {
+            //recuperamos la caja de horas
+            let cajahoras = document.getElementById("cajahoras");
+            //recuperamos la caja del importe hora
+            let cajaimporte = document.getElementById("cajaimporte");
+            //necesito una variable con el numero horas
+            let horas = parseInt(cajahoras.value);
+            //necesito una variable con el precio hora
+            let precio = parseInt(cajaimporte.value);
+            //quiero saber si el usuario tiene horas extra a partir 
+            //de la hora 36.
+            //necesito una variable para guardar las horas extra
+            let horasextra = 0;
+            //necesito una variable para el importe base
+            let importebase = 0;
+            let importeextra = 0;
+            //otra variable para el importe extra
+            if (horas > 36){
+                //aqui ya tengo horas extra!!!
+                horasextra = horas - 36;
+                importeextra = horasextra * (precio + 2);
+                importebase = 36 * precio;
+            }else{
+                importebase = horas * precio;
+            }
+            //recuperamos el mensaje
+            let mensaje = document.getElementById("mensaje");
+            //escribimos los datos
+            mensaje.innerText = "Horas: " + horas
+            + ", Precio hora: " + precio
+            + ", Importe base: " + importebase
+            + ", Horas extra: " + horasextra
+            + ", Importe extra: " + importeextra;
+        }
+    </script>
+</head>
+<body>
+    <h1>Ejemplo horas extra</h1>
+    Número horas trabajadas:
+    <input type="number" id="cajahoras"/><br/>
+    Precio hora
+    <input type="number" id="cajaimporte"/><br/>
+    <button onclick="calcularDatos()">Calcular cosas</button>
+    <p id="mensaje"></p>
+</body>
+</html>
