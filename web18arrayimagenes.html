@@ -6,7 +6,17 @@
     <title>Document</title>
     <script>
         function cambiarImagen() {
-
+            //debemos recuperar un array con todas las imagenes
+            let imagenes = document.getElementsByTagName("img");
+            //recorremos todas las imagenes, empezando en cero y 
+            //terminando en length - 1
+            for (let i = 0; i < imagenes.length; i++){
+                //almacenamos cada img en una variable
+                //con la que estamos recorriendo
+                let img = imagenes[i];
+                //modificamos la imagen
+                img.src = "images/02.jpg";
+            }
         }
     </script>
     <style>
