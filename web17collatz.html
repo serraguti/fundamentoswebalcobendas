@@ -14,9 +14,22 @@
             let numero = parseInt(cajanumero.value);
             //contenido para el dibujo HTML
             let contenido = "";
+            /*
+•	Si el número es par, se divide entre 2
+•	Si el número es impar, se multiplicar por 3 y se suma 1
+            */
             while (numero != 1){
-                
+                //evaluamos par/impar
+                if (numero % 2 == 0){
+                    numero = numero / 2;
+                }else{
+                    numero = numero * 3 + 1;
+                }
+                //guardamos el contenido
+                contenido += "<li>" + numero + "</li>";
             }
+            //dibujamos el valor de contenido en la lista
+            listanumeros.innerHTML = contenido;
         }
     </script>
 </head>
