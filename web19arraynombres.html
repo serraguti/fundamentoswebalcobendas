@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //tendremos una serie de nombres
+        let arraynombres = ["Ana", "Diana", "Sofia"];
+        function addName() {
+            //queremos añadir un nombre nuevo al Array
+            //recuperamos la caja con el nombre
+            let cajanombre = document.getElementById("cajanombre");
+            //recuperamos el valor de la caja
+            let nombre = cajanombre.value;
+            //añadimos el nombre al Array
+            arraynombres.push(nombre);
+            //podemos llamar a la función que dibuja los nombres
+            dibujarNombres();
+        }
+
+        function dibujarNombres() {
+            //recuperamos el elemento lista para dibujar
+            let lista = document.getElementById("listanombres");
+            //dibujamos los nombres en la lista
+            let contenido = "";
+            for (let nombre of arraynombres){
+                //incluimos el contenido
+                contenido += "<li>" + nombre + "</li>";
+            }
+            //dibujamos el contenido en la lista
+            lista.innerHTML = contenido;
+        }
+
+        function eliminarNombre() {
+            //recuperamos la caja indice
+            let cajaindice = document.getElementById("cajaindice");
+            //extraemos el numero de la caja
+            let posicion = parseInt(cajaindice.value);
+            //para eliminar del Array se utiliza un método
+            //llamado splice donde le indicamos la posición a eliminar
+            //y el número de elementos que deseamos borrar
+            arraynombres.splice(posicion, 1);
+            //si queremos ver los cambios, llamamos a dibujar
+            dibujarNombres();
+        }
+    </script>
+</head>
+<body>
+    <h1>Array de nombres</h1>
+    Nuevo nombre: <input type="text" id="cajanombre"/>
+    <button onclick="addName()">Añadir nombre</button><br/>
+    Indice a eliminar: <input type="number" id="cajaindice"/>
+    <button onclick="eliminarNombre()">Eliminar nombre</button><br/>
+    <button onclick="dibujarNombres()">Dibujar nombres</button>
+    <ul id="listanombres"></ul>
+</body>
+</html>
