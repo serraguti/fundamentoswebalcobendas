@@ -22,7 +22,19 @@
         }
 
         function seleccionarImagen(){
-            
+            //tenemos que recuperar nuestro select que 
+            //es el objeto que contiene el nombre de la imagen
+            let select = document.getElementById("selectimagenes");
+            //recuperamos el nombre de la imagen seleccionada
+            let nombreimagen = select.value;
+            //recuperamos todas las imagenes de la pagina
+            let imagenes = document.getElementsByTagName("img");
+            //recorremos cada imagen
+            for (let img of imagenes){
+                //por ultimo, indicamos a cada imagen
+                //que ponga el nombre de la imagen seleccionada
+                img.src = "images/" + nombreimagen;
+            }
         }
     </script>
     <style>
