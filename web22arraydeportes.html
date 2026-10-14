@@ -6,7 +6,21 @@
     <title>Document</title>
     <script>
         function mostrarFavoritos() {
-
+            //debemos buscar todos los input
+            let checkbox = document.getElementsByTagName("input");
+            //variable para guardar el contenido de los checkbox
+            let contenido = "";
+            for (let chk of checkbox){
+                if (chk.checked){
+                    //Tenemos los chequeados
+                    //almacenamos el valor dentro del contenido
+                    contenido += chk.value + ", ";
+                }
+            }
+            //recuperamos el titulo resultado
+            let resultado = document.getElementById("resultado");
+            //dibujamos el contenido en el resultado
+            resultado.innerText = contenido;
         }
     </script>
 </head>
