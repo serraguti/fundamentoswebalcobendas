@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function cargarColores() {
+            let colores = ["red", "yellow", "green", "fuchsia", "blue"]
+            //buscamos el select llamado selectcolores
+            let select = document.getElementById("selectcolores");
+            //declaramos el contenido html para el select
+            let contenido = "";
+            //recorremos los colores del array
+            for (let color of colores){
+                //escribimos el contenido de los options html
+                contenido += "<option>" + color + "</option>";
+            }
+            //escribimos dentro del select, el contenido
+            select.innerHTML = contenido;
+        }
+
+        //TENEMOS UN CODIGO PARA CUANDO INICIA LA PAGINA
+        window.onload = function() {
+            cargarColores();
+        }
+
+        function mostrarSeleccionado() {
+            //buscamos el select
+            let select = document.getElementById("selectcolores");
+            //guardamos en una variable el color seleccionado
+            let seleccionado = "";
+            //almacenamos los options dentro del select
+            let opciones = select.options;
+            //recorremos todos los options para averiguar el seleccionado
+            for (let opcion of opciones){
+                //preguntamos que opción está seleccionada
+                if (opcion.selected){
+                    //guardamos el valor del seleccionado
+                    seleccionado = opcion.value;
+                }
+            }
+            //buscamos el titulo de resultado
+            let resultado = document.getElementById("resultado");
+            //dibujamos el seleccionado
+            resultado.innerText = "Color seleccionado: " + seleccionado;
+            resultado.style.color = seleccionado;
+        }
+    </script>
+</head>
+<body>
+    <h1>Colores Select</h1>
+    Seleccione un color:
+    <select id="selectcolores">
+    </select>
+    <button onclick="mostrarSeleccionado()">Mostrar seleccionado</button>
+    <h1 id="resultado"></h1>
+</body>
+</html>
