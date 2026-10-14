@@ -23,8 +23,16 @@
         }
 
         function generarNumeros() {
-            let random = parseInt(Math.random() * 100)  + 1;
-            console.log(random);
+            let cajas = document.getElementsByTagName("input")
+            for (let input of cajas){
+                let random = parseInt(Math.random() * 100)  + 1;
+                console.log(random);
+                input.value = random;
+            }
+        }
+
+        window.onload = function() {
+            generarNumeros();
         }
     </script>
 </head>
