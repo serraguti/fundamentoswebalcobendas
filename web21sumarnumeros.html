@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function sumarNumerosCajas() {
+            //queremos recuperar todas las cajas input
+            let cajas = document.getElementsByTagName("input");
+            //declaramos una variable para la suma
+            let suma = 0;
+            //recorremos cada caja para recuperar el valor
+            for (let input of cajas){
+                //recuperamos el numero del valor de las cajas
+                let numero = parseInt(input.value);
+                //sumamos cada numero
+                suma += numero;
+            }
+            //recuperamos el elemento resultado
+            let resultado = document.getElementById("resultado");
+            resultado.innerText = "La suma es " + suma; 
+        }
+    </script>
+</head>
+<body>
+    <h1>Sumar numeros en cajas</h1>
+    <h2 id="resultado"></h2>
+    <button onclick="sumarNumerosCajas()">Sumar números</button>
+    <input type="number"/>
+    <input type="number"/>
+    <input type="number"/>
+    <input type="number"/>
+</body>
+</html>
