@@ -21,11 +21,17 @@
             let resultado = document.getElementById("resultado");
             resultado.innerText = "La suma es " + suma; 
         }
+
+        function generarNumeros() {
+            let random = parseInt(Math.random() * 100)  + 1;
+            console.log(random);
+        }
     </script>
 </head>
 <body>
     <h1>Sumar numeros en cajas</h1>
     <h2 id="resultado"></h2>
+    <button onclick="generarNumeros()">Generar números</button>
     <button onclick="sumarNumerosCajas()">Sumar números</button>
     <input type="number"/>
     <input type="number"/>
