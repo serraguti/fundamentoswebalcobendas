@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function mostrarMascotas() {
+            //queremos un conjunto de mascotas (array)
+            let arraymascotas = [];
+            //creamos una nueva mascota
+            let gato = new Object();
+            gato.nombre = "Garfield";
+            gato.raza = "Gato";
+            gato.edad = 41;
+            let perro = new Object();
+            perro.nombre = "Slinky";
+            perro.raza = "Perro";
+            perro.edad = 10;
+            //guardamos nuestras mascotas en el array
+            arraymascotas.push(gato);
+            arraymascotas.push(perro);
+            //recorremos todas nuestras mascotas
+            //y las escribimos en un contenido html
+            let contenido = "";
+            for (let mascota of arraymascotas){
+                contenido += "<li>" + mascota.nombre + "</li>";
+            }
+            //buscamos la lista llamada resultado
+            let resultado = document.getElementById("resultado");
+            //dibujamos el contenido HTML
+            resultado.innerHTML = contenido;
+        }
+    </script>
+</head>
+<body>
+    <h1>Conjunto de mascotas</h1>
+    <button onclick="mostrarMascotas()">Mostrar mascotas</button>
+    <ul id="resultado">
+    </ul>
+</body>
+</html>
