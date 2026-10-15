@@ -30,6 +30,23 @@
             let resultado = document.getElementById("resultado");
             //dibujamos el contenido HTML
             resultado.innerHTML = contenido;
+            //queremos dibujar las mascotas en una tabla html
+            //declaramos una variable para el dibujo de cada fila
+            let filas = "";
+            //recorremos todas las mascotas
+            for (let mascota of arraymascotas){
+                //dibujamos las filas de la tabla
+                filas += "<tr>"; //abrimos fila
+                //creamos cada columna
+                filas += "<td>" + mascota.nombre + "</td>"; //columna nombre
+                filas += "<td>" + mascota.raza + "</td>"; //columna raza
+                filas += "<td>" + mascota.edad + "</td>"; // columna edad
+                filas += "</tr>"; //cerramos fila
+            }
+            //buscamos la tabla de las mascotas
+            let tabla = document.getElementById("tablamascotas");
+            //dibujamos las filas en la tabla
+            tabla.innerHTML = filas;
         }
     </script>
 </head>
@@ -38,5 +55,18 @@
     <button onclick="mostrarMascotas()">Mostrar mascotas</button>
     <ul id="resultado">
     </ul>
+    <table border="1" id="tablamascotas"></table>
+    <table border="1">
+        <tr>
+            <td> Garfield </td>
+            <td> Gato gordo </td>
+            <td> 41 </td>
+        </tr>
+        <tr>
+            <td> Slinky </td>
+            <td> Perro muelle </td>
+            <td> 14 </td>
+        </tr>
+    </table>
 </body>
 </html>
