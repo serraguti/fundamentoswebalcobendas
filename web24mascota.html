@@ -16,13 +16,31 @@
             //RECUPERAMOS EL TITULO RESULTADO
             let resultado = document.getElementById("resultado");
             //pintamos la mascota
-            resultado.innerText = mascota;
+            resultado.innerText = mascota.nombre 
+                + ", " + mascota.raza + ", " + mascota.edad;
+        }
+
+        function generarOtraMascota() {
+            //creamos una mascota mediante sintaxis json
+            //la diferencia está en que tenemos que crear el objeto y las 
+            //propiedades a la vez
+            let mascota = {
+                nombre: "Simba",
+                raza: "Leona",
+                edad: 21
+            }
+            //capturamos el titulo resultado
+            let resultado = document.getElementById("resultado");
+            //dibujamos la mascota
+            resultado.innerText = mascota.nombre 
+                + ", " + mascota.raza + ", " + mascota.edad;
         }
     </script>
 </head>
 <body>
     <h1>Objeto mascota</h1>
     <button onclick="generarMascota()">Mostrar mascota</button>
+    <button onclick="generarOtraMascota()">Otra mascota</button>
     <h2 style="color:blue" id="resultado"></h2>
 </body>
 </html>
