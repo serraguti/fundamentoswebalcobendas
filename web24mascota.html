@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function generarMascota() {
+            //DECLARAMOS UN OBJETO MASCOTA
+            let mascota = new Object();
+            //CON OBJECT, ESTE OBJETO NO TIENE PROPIEDADES
+            //DEBEMOS INDICAR SUS PROPIEDADES
+            mascota.raza = "Muñeco de nieve";
+            mascota.nombre = "Olaf";
+            mascota.edad = 14;
+            //RECUPERAMOS EL TITULO RESULTADO
+            let resultado = document.getElementById("resultado");
+            //pintamos la mascota
+            resultado.innerText = mascota;
+        }
+    </script>
+</head>
+<body>
+    <h1>Objeto mascota</h1>
+    <button onclick="generarMascota()">Mostrar mascota</button>
+    <h2 style="color:blue" id="resultado"></h2>
+</body>
+</html>
