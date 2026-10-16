@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        async function leerJugadoresJson() {
+            let path = "documents/jugadores.json";
+            let response = await fetch(path);
+            //recuperamos los datos json de la respuesta
+            let datos = await response.json();
+            console.log(datos);
+            //debemos tener un contenido para dibujar cada jugador
+            let contenido = "";
+            //debemos recorrer todos los jugadores
+            for (let player of datos){
+                contenido += `
+                    <li style='color:blue'>
+                        ${player.jugador}
+                        <img src="${player.imagen}"/>
+                    </li>                    
+                `
+            }
+            //buscamos la lista de jugadores en html
+            let lista = document.getElementById("listajugadores");
+            lista.innerHTML = contenido;
+        }
+    </script>
+    <style>
+        img {
+            width: 120px; 
+            height: 120px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Jugadores JSON</h1>
+    <button onclick="leerJugadoresJson()">Leer jugadores</button>
+    <ul id="listajugadores">
+    </ul>
+</body>
+</html>

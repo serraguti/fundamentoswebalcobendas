@@ -39,10 +39,16 @@
             //recorremos cada elemento del array
             for (let person of arraypersonas){
                 //vamos dibujando los datos en filas
-                filas += "<tr>";
-                filas += "<td>" + person.nombre + "</td>";
-                filas += "<td>" + person.email + "</td>";
-                filas += "</tr>";
+                // filas += "<tr>";
+                // filas += "<td>" + person.nombre + "</td>";
+                // filas += "<td>" + person.email + "</td>";
+                // filas += "</tr>";
+                filas += `
+                    <tr>
+                        <td>${person.nombre}</td>
+                        <td>${person.email}</td>
+                    </tr>
+                `
             }
             //dibujamos las filas en la tabla
             tabla.innerHTML = filas;

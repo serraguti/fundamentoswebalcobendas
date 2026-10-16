@@ -18,7 +18,8 @@
             //recorremos cada cliente de los datos
             for (let cliente of datos){
                 //dibujamos el nombre de cada cliente en la lista
-                contenido += "<li>" + cliente.nombre + "</li>";
+                //contenido += "<li>" + cliente.nombre + "</li>";
+                contenido += `<li> ${cliente.nombre} </li>`
             }
             //buscamos la lista de clientes en html
             let lista = document.getElementById("listaclientes");
