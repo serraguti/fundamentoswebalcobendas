@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let arraypersonas = [
+            {
+                "nombre": "Lucia",
+                "email": "lucia@gmail.com"
+            },
+            {
+                "nombre": "Adrian",
+                "email": "adrian@gmail.com"
+            }
+        ];
+
+        function crearPersona() {
+            //recuperamos las cajas input del dibujo html
+            let cajanombre = document.getElementById("cajanombre");
+            let cajaemail = document.getElementById("cajaemail");
+            //Creamos un nuevo objeto persona con los valores de las cajas
+            let persona = new Object();
+            persona.nombre = cajanombre.value;
+            persona.email = cajaemail.value;
+            //añadimos la persona al array
+            arraypersonas.push(persona);
+        }
+
+        function dibujarPersonas() {
+            //necesitamos recuperar la tabla del dibujo
+            let tabla = document.getElementById("tablapersonas");
+            //necesitamos una variable para dibujar cada fila de la tabla
+            let filas = "";
+            //recorremos cada elemento del array
+            for (let person of arraypersonas){
+                //vamos dibujando los datos en filas
+                filas += "<tr>";
+                filas += "<td>" + person.nombre + "</td>";
+                filas += "<td>" + person.email + "</td>";
+                filas += "</tr>";
+            }
+            //dibujamos las filas en la tabla
+            tabla.innerHTML = filas;
+        }
+    </script>
+</head>
+<body>
+    <h1>Objetos Array de personas</h1>
+    Nombre: <input type="text" id="cajanombre"/><br/>
+    Email: <input type="text" id="cajaemail"/><br/>
+    <button onclick="crearPersona()">Crear persona</button>
+    <button onclick="dibujarPersonas()">Dibujar personas</button><br/>
+    <table border="1" id="tablapersonas"></table>
+</body>
+</html>
