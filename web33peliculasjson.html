@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        async function cargarPeliculas() {
+            let path = "documents/cine.json";
+            //HACEMOS UNA PETICION AL SERVIDOR
+            let response = await fetch(path);
+            //CONVERTIMOS LOS DATOS DE LA RESPUESTA A JSON
+            let datos = await response.json();
+            let contenido = "";
+            //RECORREMOS LOS DATOS DE PELICULAS
+            for (let peli of datos){
+                //RELLENAMOS EL select CON <option> Y EL titulo de pelicula
+                contenido += `
+                    <option> ${peli.Titulo} </option>
+                `
+            }
+            //BUSCAMOS EL select EN HTML
+            let select = document.getElementById("selectpelicula");
+            //DIBUJAMOS EL CONTENIDO DENTRO DEL SELECT
+            select.innerHTML = contenido;
+        }
+    </script>
+</head>
+<body>
+    <h1>Peliculas JSON</h1>
+    <button onclick="cargarPeliculas()">Cargar peliculas</button>
+    Seleccione película
+    <select id="selectpelicula"></select>
+
+</body>
+</html>
