@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        async function cargarHeroes() {
+            let path = "documents/marvel.json";
+            let response = await fetch(path);
+            let datos = await response.json();
+            let filas = "";
+            //RECORREMOS TODOS LOS DATOS DE LOS HEROES
+            for (let hero of datos.Heroes){
+                filas += `
+                    <tr>
+                        <td>${hero.hero}</td>
+                        <td>${hero.name}</td>
+                        <td>
+                            <a href="${hero.link}">${hero.link}</a>
+                        </td>
+                        <td>
+                            <img src="${hero.img}"/>
+                        </td>
+                    </tr>
+                `
+            }
+            //recuperamos la tabla
+            let tabla = document.getElementById("tablamarvel");
+            tabla.innerHTML = filas;
+        }
+
+        async function cargarVillanos() {
+
+        }
+    </script>
+    <style>
+        img {
+            width: 150px; height: 150px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Marvel Json</h1>
+    <button onclick="cargarHeroes()">Heroes</button>
+    <button onclick="cargarVillanos()">Villanos</button>
+    <table border="1" id="tablamarvel"></table>
+</body>
+</html>
