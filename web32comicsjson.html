@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        async function leerComicsJson(){
+            let path = "documents/comics.json";
+            let response = await fetch(path);
+            //CONVERTIMOS LOS DATOS DEL SERVIDOR A JSON
+            let datos = await response.json();
+            //CREAMOS UNA VARIABLE PARA LAS FILAS DE LA TABLA
+            let filas = "";
+            //RECORREMOS CADA ELEMENTO DE DATOS
+            for (let comic of datos){
+                //ALMACENANDO EN FILAS LOS DATOS
+                filas += `
+                    <tr>
+                        <td>${comic.titulo}</td>
+                        <td> ${comic.descripcion} </td>
+                        <td>
+                            <img src="${comic.imagen}"/>    
+                        </td>
+                    </tr>
+                `
+            }
+            //BUSCAMOS LA TABLA DE HTML
+            let tabla = document.getElementById("tablacomics");
+            //DIBUJAMOS LAS FILAS EN LA TABLA
+            tabla.innerHTML = filas;
+        }
+    </script>
+    <style>
+        img { width: 100px; height: 130px;}
+    </style>
+</head>
+<body>
+    <h1>Leer Comics JSON</h1>
+    <button onclick="leerComicsJson()">Leer comics</button>
+    <table border="1" id="tablacomics"></table>
+</body>
+</html>
