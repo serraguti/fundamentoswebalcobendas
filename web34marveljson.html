@@ -31,7 +31,26 @@
         }
 
         async function cargarVillanos() {
-
+            let path = "documents/marvel.json";
+            let response = await fetch(path);
+            let datos = await response.json();
+            let filas = "";
+            for (let villano of datos.Villains){
+                filas += `
+                    <tr>
+                        <td>${villano.hero}</td>
+                        <td>${villano.name}</td>
+                        <td>
+                            <a href="${villano.link}">${villano.link}</a>    
+                        </td>
+                        <td>
+                            <img src="${villano.img}"/>
+                        </td>
+                    </tr>
+                `
+            }
+            let tabla = document.getElementById("tablamarvel");
+            tabla.innerHTML = filas;
         }
     </script>
     <style>
