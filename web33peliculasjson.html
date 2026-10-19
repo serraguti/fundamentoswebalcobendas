@@ -25,6 +25,28 @@
             //DIBUJAMOS EL CONTENIDO DENTRO DEL SELECT
             select.innerHTML = contenido;
         }
+
+        async function buscarPelicula() {
+            let path = "documents/cine.json";
+            let response = await fetch(path);
+            let datos = await response.json();
+            //NECESITAMOS EL VALOR DE LA PELICULA SELECCIONADA
+            //RECUPERAMOS EL select DEL HTML
+            let select = document.getElementById("selectpelicula");
+            //RECUPERAMOS EL NOMBRE DE LA PELICULA
+            let nombrepeli = select.value;
+            //DEBEMOS RECORRER TODAS LAS PELICULAS Y COMPARAR 
+            //EL TITULO QUE RECORREMOS CON nombrepeli
+            for (let peli of datos.Peliculas){
+                if (peli.Titulo == nombrepeli){
+                    //TENEMOS LA PELICULA SELECCIONADA
+                    //BUSCAMOS RESULTADO DENTRO DE HTML
+                    let resultado = document.getElementById("resultado");
+                    //PINTAMOS EL Argumento
+                    resultado.innerText = peli.Argumento;
+                }
+            }
+        }
     </script>
 </head>
 <body>
@@ -32,6 +54,7 @@
     <button onclick="cargarPeliculas()">Cargar peliculas</button>
     Seleccione película
     <select id="selectpelicula"></select>
-
+    <button onclick="buscarPelicula()">Buscar pelicula</button>
+    <p id="resultado"></p>
 </body>
 </html>
