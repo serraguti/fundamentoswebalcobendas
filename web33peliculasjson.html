@@ -11,9 +11,10 @@
             let response = await fetch(path);
             //CONVERTIMOS LOS DATOS DE LA RESPUESTA A JSON
             let datos = await response.json();
+            console.log(datos);
             let contenido = "";
             //RECORREMOS LOS DATOS DE PELICULAS
-            for (let peli of datos){
+            for (let peli of datos.Peliculas){
                 //RELLENAMOS EL select CON <option> Y EL titulo de pelicula
                 contenido += `
                     <option> ${peli.Titulo} </option>
