@@ -6,7 +6,27 @@
     <title>Document</title>
     <script>
         async function leerServicioCustomers() {
-
+            //ANTES ERA path PORQUE ERA UNA RUTA
+            //ahora utilizamos URL
+            let url = "https://services.odata.org/V4/Northwind/Northwind.svc/Customers";
+            //realizamos una petición al servicio api
+            let response = await fetch(url);
+            //convertimos los datos en formato json
+            let datos = await response.json();
+            console.log(datos);
+            //necesitamos un contenido para el dibujo html
+            let contenido = "";
+            //recorremos todos los clientes/customers
+            for (let cliente of datos.value){
+                //dibujamos el contenido <li>
+                contenido += `
+                    <li> ${cliente.ContactName} </li>
+                `
+            }
+            //buscamos la lista de clientes del codigo html
+            let lista = document.getElementById("listaclientes");
+            //dibujamos el contenido en la lista
+            lista.innerHTML = contenido;
         }
     </script>
 </head>
