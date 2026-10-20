@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        async function cargarEmpleados(){
+            let url = "https://apiempleadosfullstack.azurewebsites.net/api/empleados";
+            //realizamos una petición
+            let response = await fetch(url);
+            //convertimos los datos a json
+            let datos = await response.json();
+            //declaramos una variable para las filas
+            let filas = "";
+            //recorremos cada empleado de datos
+            for (let empleado of datos){
+                //dibujamos cada fila en la tabla
+                filas += `
+                    <tr>
+                        <td> ${empleado.idEmpleado} </td>
+                        <td> ${empleado.apellido} </td>
+                        <td> ${empleado.oficio} </td>
+                        <td> ${empleado.salario} </td>
+                        <td> ${empleado.departamento} </td>
+                    </tr>
+                `
+            }
+            //buscamos la tabla en html
+            let tabla = document.getElementById("tablaempleados")
+            //dibujamos sus filas
+            tabla.innerHTML = filas;
+        }
+    </script>
+</head>
+<body>
+    <h1>Servicio Api Empleados</h1>
+    <button onclick="cargarEmpleados()">Cargar empleados</button>
+    <table border="1" id="tablaempleados"></table>
+</body>
+</html>
