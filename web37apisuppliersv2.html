@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        async function cargarSuppliers(){
+            let url = "https://services.odata.org/V4/Northwind/Northwind.svc/Suppliers"
+            //realizamos la petición al servicio
+            let response = await fetch(url);
+            //convertimos los datos de la respuesta a json
+            let datos = await response.json();
+            //creamos el contenido para el dibujo html
+            let contenido = "";
+            //recorremos todos los datos de suppliers
+            for (let s of datos.value){
+                //dibujamos dentro de contenido la lista <li>
+                contenido += `
+                    <li> ${s.SupplierID} - ${s.ContactName} </li>
+                `
+            }
+            //buscamos la lista en html
+            let lista = document.getElementById("listasuppliers");
+            //dibujamos el contenido en la lista
+            lista.innerHTML = contenido;
+        }
+
+        async function buscarSupplier(){
+            let url = "https://services.odata.org/V4/Northwind/Northwind.svc/Suppliers"
+            let response = await fetch(url);
+            let datos = await response.json();
+            //necesitamos saber el id de la cajaid
+            let cajaid = document.getElementById("cajaid");
+            let idsupplier = parseInt(cajaid.value);
+            //recuperamos del dibujo html el div para dibujar
+            let div = document.getElementById("datossupplier");
+            //recorremos todos los datos de los supplier
+            for (let s of datos.value){
+                //debemos comparar el ID de la caja con el ID del supplier
+                if (idsupplier == s.SupplierID){
+                    //tenemos el dato y dibujamos en el div
+                    div.innerHTML = `
+                        <p> Compañia ${s.CompanyName} </p>
+                        <p> Nombre: ${s.ContactName} </p>
+                        <p> ContactTitle: ${s.ContactTitle} </p>
+                        <p> Ciudad: ${s.City} </p>
+                    `
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1 style="color:blue">Suppliers Service V2</h1>
+    <button onclick="cargarSuppliers()">Cargar Suppliers</button><br/>
+    Introduzca ID: <input type="number" id="cajaid"/>
+    <button onclick="buscarSupplier()">Buscar supplier</button>
+    <div id="datossupplier"></div>
+    <ul id="listasuppliers"></ul>
+</body>
+</html>
