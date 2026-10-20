@@ -13,13 +13,23 @@
             let datos = await response.json();
             //creamos el contenido para el dibujo html
             let contenido = "";
+            //debemos pintar options
+            let options = "";
             //recorremos todos los datos de suppliers
             for (let s of datos.value){
+                //dibujamos cada option con el supplier
+                options += `
+                    <option value="${s.SupplierID}"> ${s.ContactName} </option>
+                `
                 //dibujamos dentro de contenido la lista <li>
                 contenido += `
                     <li> ${s.SupplierID} - ${s.ContactName} </li>
                 `
             }
+            //buscamos el select en html
+            let select = document.getElementById("selectsupplier");
+            //dibujamos los options dentro del select
+            select.innerHTML = options;
             //buscamos la lista en html
             let lista = document.getElementById("listasuppliers");
             //dibujamos el contenido en la lista
@@ -31,7 +41,7 @@
             let response = await fetch(url);
             let datos = await response.json();
             //necesitamos saber el id de la cajaid
-            let cajaid = document.getElementById("cajaid");
+            let cajaid = document.getElementById("selectsupplier");
             let idsupplier = parseInt(cajaid.value);
             //recuperamos del dibujo html el div para dibujar
             let div = document.getElementById("datossupplier");
@@ -54,7 +64,7 @@
 <body>
     <h1 style="color:blue">Suppliers Service V2</h1>
     <button onclick="cargarSuppliers()">Cargar Suppliers</button><br/>
-    Introduzca ID: <input type="number" id="cajaid"/>
+    Seleccione un Supplier: <select id="selectsupplier"></select>
     <button onclick="buscarSupplier()">Buscar supplier</button>
     <div id="datossupplier"></div>
     <ul id="listasuppliers"></ul>
