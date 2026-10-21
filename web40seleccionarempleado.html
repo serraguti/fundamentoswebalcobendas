@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let url = "https://apiempleadosfullstack.azurewebsites.net/";
+        async function cargarEmpleados() {
+            //incluimos la peticion en la url: api/Empleados
+            let request = url + "api/empleados";
+            //realizamos una petición al servicio
+            let response = await fetch(request);
+            //convertimos los datos de la respuesta a json
+            let datos = await response.json();
+            //declaramos una variable para los options del select
+            let options = "";
+            //recorremos todos los empleados
+            for (let empleado of datos){
+                //dibujamos las options
+                options += `
+                    <option value="${empleado.idEmpleado}"> 
+                        ${empleado.apellido} 
+                    </option>
+                `
+            }
+            //buscamos el select dentro de html
+            let select = document.getElementById("selectempleado");
+            //dibujamos los options en el select
+            select.innerHTML = options;
+        }
+
+        async function buscarEmpleado() {
+            //el id no nos lo inventamos, tenemos que recuperlo
+            //del select
+            let select = document.getElementById("selectempleado");
+            let idempleado = select.value;
+            //construimos la peticion: api/Empleados/7369
+            let request = url + "api/empleados/" + idempleado;
+            //realizamos la peticion
+            let response = await fetch(request);
+            //convertimos a json
+            let datos = await response.json();
+            //en datos ya tenemos al empleado
+            //buscamos el div de html
+            let div = document.getElementById("datosempleado");
+            //dibujamos los datos del empleado en el div
+            div.innerHTML = `
+                <p> ${datos.apellido} </p>
+                <p> ${datos.oficio}  </p>
+                <p> ${datos.salario}  </p>
+            `
+        }
+    </script>
+</head>
+<body>
+    <h1>Selección de empleado</h1>
+    Seleccione un empleado
+    <select id="selectempleado"></select>
+    <button onclick="cargarEmpleados()">Cargar empleados</button>
+    <button onclick="buscarEmpleado()">Buscar empleado</button>
+    <div id="datosempleado"></div>
+</body>
+</html>
