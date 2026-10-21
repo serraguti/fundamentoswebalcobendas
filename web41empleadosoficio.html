@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let url = "https://apiempleadosfullstack.azurewebsites.net/";
+        async function cargarOficios() {
+            //construimos nuestra peticion
+            let request = url + "api/empleados/oficios";
+            //realizamos la peticion al servicio
+            let response = await fetch(request);
+            //convertimos a json los datos
+            let datos = await response.json();
+            //declaramos options para el select
+            let options = "";
+            //recorremos todos los datos de cada oficio
+            for (let oficio of datos){
+                //dibujamos los options
+                options += `
+                    <option> ${oficio} </option>
+                `
+            }
+            //buscamos el select en html
+            let select = document.getElementById("selectoficio");
+            select.innerHTML = options;
+        }
+
+        async function buscarEmpleados() {
+
+        }
+    </script>
+</head>
+<body>
+    <h1>Oficios de empleados</h1>
+    Seleccione un oficio:
+    <select id="selectoficio"></select>
+    <button onclick="cargarOficios()">Cargar oficios</button>
+    <button onclick="buscarEmpleados()">Buscar empleados</button>
+
+</body>
+</html>
