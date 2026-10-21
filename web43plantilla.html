@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let url = "https://apiplantillacore.azurewebsites.net/";
+        async function cargarPlantilla(){
+            let request = url + "api/plantilla";
+            let response = await fetch(request);
+            let datos = await response.json();
+            let filas = "";
+            //recorremos toda la plantilla de datos
+            for (let plantilla of datos){
+                //dibujamos las filas para la tabla
+                filas += `
+                    <tr>
+                        <td> ${plantilla.apellido} </td>
+                        <td> ${plantilla.funcion} </td>
+                        <td> ${plantilla.turno} </td>
+                    </tr>
+                `
+            }
+            //buscamos la tabla dentro de html
+            let tabla = document.getElementById("tablaplantilla");
+            tabla.innerHTML = filas;
+        }
+
+        async function buscarPlantilla() {
+            //buscamos el input del html
+            let input = document.getElementById("cajafuncion");
+            //recuperamos el valor del input que es la función
+            let funcion = input.value;
+            let request = url + "api/Plantilla/PlantillaFuncion/" + funcion;
+            let response = await fetch(request);
+            let datos = await response.json();
+            let filas = "";
+            //recorremos toda la plantilla de datos
+            for (let plantilla of datos){
+                //dibujamos las filas para la tabla
+                filas += `
+                    <tr>
+                        <td> ${plantilla.apellido} </td>
+                        <td> ${plantilla.funcion} </td>
+                        <td> ${plantilla.turno} </td>
+                    </tr>
+                `
+            }
+            //buscamos la tabla dentro de html
+            let tabla = document.getElementById("tablaplantilla");
+            tabla.innerHTML = filas;            
+        }
+    </script>
+</head>
+<body>
+    <h1>Api Plantilla</h1>
+    Introduzca una función:
+    <input type="text" id="cajafuncion"/>
+    <button onclick="cargarPlantilla()">Cargar plantilla</button>
+    <button onclick="buscarPlantilla()">Buscar plantilla</button>
+    <table border="1" id="tablaplantilla"></table>
+</body>
+</html>
