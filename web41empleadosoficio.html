@@ -28,7 +28,28 @@
         }
 
         async function buscarEmpleados() {
-
+            //recuperamos el select del html
+            let select = document.getElementById("selectoficio");
+            //recuperamos el valor del select
+            let oficio = select.value;
+            //construimos la peticion
+            let request = url + "api/empleados/empleadosoficio/" + oficio;
+            //realizamos una peticion al servicio
+            let response = await fetch(request);
+            //convertimos los datos a json
+            let datos = await response.json();
+            let contenido = "";
+            //recorremos cada empleado de datos
+            for (let empleado of datos){
+                //dibujamos en contenido el apellido de cada empleado
+                contenido += `
+                    <li> ${empleado.apellido} </li>
+                `
+            }
+            //buscamos la lista en html
+            let lista = document.getElementById("listaempleados");
+            //dibujamos el contenido en la lista
+            lista.innerHTML = contenido;
         }
     </script>
 </head>
@@ -38,6 +59,6 @@
     <select id="selectoficio"></select>
     <button onclick="cargarOficios()">Cargar oficios</button>
     <button onclick="buscarEmpleados()">Buscar empleados</button>
-
+    <ul id="listaempleados"></ul>
 </body>
 </html>
