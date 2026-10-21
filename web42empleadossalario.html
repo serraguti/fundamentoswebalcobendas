@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let url = "https://apiempleadosfullstack.azurewebsites.net/";
+        async function buscarSalarios() {
+            //peticion: api/Empleados/EmpleadosSalario/300000
+            //recuperamos el input del html
+            let input = document.getElementById("cajasalario");
+            //recuperamos el salario del valor del input
+            let salario = input.value;
+            //construimos la peticion
+            let request = url + "api/Empleados/EmpleadosSalario/" + salario;
+            //realizamos la peticion al servicio
+            let response = await fetch(request);
+            //convertimos los datos a json
+            let datos = await response.json();
+            let contenido = "";
+            //recorremos cada empleado de datos
+            for (let empleado of datos){
+                //dibujamos cada elemento <li> en contenido
+                contenido += `
+                    <li> ${empleado.apellido}, ${empleado.salario} </li>
+                `
+            }
+            //buscamos el ul del html
+            let lista = document.getElementById("listaempleados");
+            lista.innerHTML = contenido;
+        }
+    </script>
+</head>
+<body>
+    <h1>Empleados salario</h1>
+    Introduzca un salario:
+    <input type="number" id="cajasalario"/>
+    <button onclick="buscarSalarios()">Buscar salarios</button>
+    <ul id="listaempleados"></ul>
+</body>
+</html>
