@@ -4,6 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script>
+        async function incrementarSalario() {
+            //necesitamos la información de a quién 
+            //vamos a incrementar el salario
+            //necesitamos la caja de funcion del codigo html
+            let cajafuncion = document.getElementById("cajafuncion");
+            //necesitamos la caja de incremento del codigo html
+            let cajaincremento = document.getElementById("cajaincremento");
+            //recuperamos el valor de la funcion de la caja funcion
+            let funcion = cajafuncion.value;
+            //recuperamos el incremento de la caja incremento
+            let incremento = cajaincremento.value;
+            
+
+        }
+    </script>
 </head>
 <body>
     <h1>Update salario plantilla</h1>
@@ -11,6 +27,6 @@
     <input type="text" id="cajafuncion"/><br/>
     Incremento salarial: 
     <input type="number" id="cajaincremento"/><br/>
-    <button>Incrementar salarios</button>
+    <button onclick="incrementarSalario()">Incrementar salarios</button>
 </body>
 </html>
