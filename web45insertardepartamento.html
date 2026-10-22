@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let url = "https://apicruddepartamentoscore.azurewebsites.net/";
+        async function insertarDepartamento() {
+            let request = url + "api/departamentos";
+            //buscamos la caja id del html
+            let cajaid = document.getElementById("cajaid");
+            //buscamos la cajanombre del html
+            let cajanombre = document.getElementById("cajanombre");
+            //buscamos la cajalocalidad del html
+            let cajalocalidad = document.getElementById("cajalocalidad");
+            //necesitamos enviar un objeto departamento
+            //creamos un nuevo objeto
+            let nuevo = {
+                "numero": parseInt(cajaid.value),
+                "nombre": cajanombre.value,
+                "localidad": cajalocalidad.value
+            }
+            //para enviar la informacion al servicio, no 
+            //puedo hacerlo directamente.  Tengo que utilizar 
+            //JSON.stringfy para convertir a JSON
+            //convertimos el objeto a json
+            let data = JSON.stringify(nuevo);
+            //llamamos a nuestro servicio con un POST
+            let response = await fetch(request, {
+                "method": "POST",
+                "body": data,
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+            })
+            alert("Todo ok, Jose Luis");
+        }
+    </script>
+</head>
+<body>
+    <h1>Insertar departamento</h1>
+    Id: <input type="number" id="cajaid"/><br/>
+    Nombre: <input type="text" id="cajanombre"/><br/>
+    Localidad: <input type="text" id="cajalocalidad"/><br/>
+    <button onclick="insertarDepartamento()">Insertar</button>
+</body>
+</html>
