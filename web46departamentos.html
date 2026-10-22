@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let url = "https://apicruddepartamentoscore.azurewebsites.net/";
+        async function cargarDepartamentos() {
+            let request = url + "api/departamentos";
+            //realizamos la peticion al servidor
+            let response = await fetch(request);
+            //convertimos los datos a json
+            let datos = await response.json();
+            //filas para la tabla
+            let filas = "";
+            for (let departamento of datos){
+                //hacemos el dibujo de las filas de la tabla
+                filas += `
+                    <tr>
+                        <td>${departamento.numero}</td>
+                        <td>${departamento.nombre}</td>
+                        <td>${departamento.localidad}</td>
+                    </tr>
+                `
+            }
+            //buscamos la tabla en html
+            let tabla = document.getElementById("tabladepartamentos")
+            tabla.innerHTML = filas;
+        }
+    </script>
+</head>
+<body>
+    <h1>Departamentos</h1>
+    <button onclick="cargarDepartamentos()">Cargar departamentos</button>
+    <table border="1" id="tabladepartamentos"></table>
+</body>
+</html>
