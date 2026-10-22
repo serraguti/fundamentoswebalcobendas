@@ -4,8 +4,73 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script>
+        let url = "https://apicruddepartamentoscore.azurewebsites.net/";
+        async function modificarDepartamento(){
+            let request = url + "api/departamentos";
+            //buscamos la caja id del html
+            let cajaid = document.getElementById("cajaid");
+            //buscamos la cajanombre del html
+            let cajanombre = document.getElementById("cajanombre");
+            //buscamos la cajalocalidad del html
+            let cajalocalidad = document.getElementById("cajalocalidad");
+            //necesitamos enviar un objeto departamento
+            //creamos un nuevo objeto para el api
+            let departamento = {
+                "numero": parseInt(cajaid.value),
+                "nombre": cajanombre.value,
+                "localidad": cajalocalidad.value
+            }
+            //para enviar la informacion al servicio, no 
+            //puedo hacerlo directamente.  Tengo que utilizar 
+            //JSON.stringfy para convertir a JSON
+            //convertimos el objeto a json
+            let data = JSON.stringify(departamento);
+            //llamamos a nuestro servicio con un POST
+            let response = await fetch(request, {
+                "method": "PUT",
+                "body": data,
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+            })
+            cargarDepartamentos();
+        }
+
+        window.onload = function() {
+            cargarDepartamentos();
+        }        
+
+        async function cargarDepartamentos() {
+            let request = url + "api/departamentos";
+            //realizamos la peticion al servidor
+            let response = await fetch(request);
+            //convertimos los datos a json
+            let datos = await response.json();
+            //filas para la tabla
+            let filas = "";
+            for (let departamento of datos){
+                //hacemos el dibujo de las filas de la tabla
+                filas += `
+                    <tr>
+                        <td>${departamento.numero}</td>
+                        <td>${departamento.nombre}</td>
+                        <td>${departamento.localidad}</td>
+                    </tr>
+                `
+            }
+            //buscamos la tabla en html
+            let tabla = document.getElementById("tabladepartamentos")
+            tabla.innerHTML = filas;
+        }        
+    </script>
 </head>
 <body>
-    
+    <h1>Modificar departamento</h1>
+    Id departamento: <input type="number" id="cajaid"/><br/>
+    Nombre: <input type="text" id="cajanombre"/><br/>
+    Localidad: <input type="text" id="cajalocalidad"/><br/>
+    <button onclick="modificarDepartamento()">Modificar</button>
+    <table border="1" id="tabladepartamentos"></table>    
 </body>
 </html>
