@@ -28,10 +28,27 @@
             let tabla = document.getElementById("tabladepartamentos")
             tabla.innerHTML = filas;
         }
+
+        async function eliminarDepartamento() {
+            //recuperamos la cajaid de html
+            let cajaid = document.getElementById("cajaid");
+            //recuperamos el valor del id de la caja
+            let id = cajaid.value;
+            //construimos la peticion
+            let request = url + "api/departamentos/" + id;
+            //realizamos la petición al servidor con delete
+            let response = await fetch(request, {
+                "method": "DELETE"
+            })
+            alert("Departamento eliminado")
+        }
     </script>
 </head>
 <body>
     <h1>Departamentos</h1>
+    Id departamento: <input type="number" id="cajaid"/>
+    <button onclick="eliminarDepartamento()">Eliminar departamento</button>
+    <br/>
     <button onclick="cargarDepartamentos()">Cargar departamentos</button>
     <table border="1" id="tabladepartamentos"></table>
 </body>
