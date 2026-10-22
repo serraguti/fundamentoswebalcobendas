@@ -25,6 +25,7 @@
             let response = await fetch(request, {
                 "method": "PUT"
             });
+            //response.status = 200
             console.log(response);
             //buscamos el mensaje
             let mensaje = document.getElementById("mensaje");
@@ -34,6 +35,7 @@
     </script>
 </head>
 <body>
+    https://apicruddepartamentoscore.azurewebsites.net/
     <h1>Update salario plantilla</h1>
     <a href="web43plantilla.html">Ir a plantilla</a>
     <h2 id="mensaje"></h2>
