@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let urldepartamentos = "https://apicruddepartamentoscore.azurewebsites.net/";
+        let urlempleados = "https://apiempleadosfullstack.azurewebsites.net/";
+        async function cargarDepartamentos() {
+            //construimos la peticion
+            let request = urldepartamentos + "api/departamentos";
+            //realizamos la petición
+            let response = await fetch(request);
+            //convertimos los datos a json
+            let datos = await response.json();
+            let options = "";
+            //recorremos cada departamento de datos
+            for (let departamento of datos){
+                //creamos los options para el select
+                options += `
+                    <option value="${departamento.numero}"> 
+                        ${departamento.nombre} 
+                    </option>
+                `
+            }
+            //buscamos el select dentro de html
+            let select = document.getElementById("selectdepartamento");
+            //dibujamos las options en el select
+            select.innerHTML = options;
+        }
+
+        async function buscarEmpleados() {
+            //buscar el select dentro de html
+            let select = document.getElementById("selectdepartamento");
+            //recuperamos el value del id del departamento del select
+            let iddepartamento = select.value;
+            //construimos nuestra peticion
+            let request = urlempleados + 
+                "api/Empleados/EmpleadosDepartamento/" + iddepartamento;
+            //realizamos la peticion
+            let response = await fetch(request);
+            //convertimos los datos a json
+            let datos = await response.json();
+            let filas = "";
+            //recorremos cada empleado de datos
+            for (let empleado of datos){
+                //dibujamos las filas de la tabla
+                filas += `
+                    <tr>
+                        <td> ${empleado.apellido} </td>
+                        <td> ${empleado.oficio} </td>
+                        <td> ${empleado.departamento} </td>
+                    </tr>
+                `
+            }
+            //buscamos la tabla en html
+            let tabla = document.getElementById("tablaempleados");
+            tabla.innerHTML = filas;
+        }
+    </script>
+</head>
+<body>
+    <h1>Empleados departamentos</h1>
+    <button onclick="cargarDepartamentos()">Cargar departamentos</button>
+    Seleccione un departamento: 
+    <select id="selectdepartamento"></select>
+    <button onclick="buscarEmpleados()">Buscar empleados</button>
+    <table border="1" id="tablaempleados"></table>
+</body>
+</html>
