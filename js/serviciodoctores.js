@@ -1,0 +1,92 @@
+        let url = "https://apicruddoctores.azurewebsites.net/";
+        async function insertarDoctor() {
+            let cajaid = document.getElementById("cajaid");
+            let cajahospital = document.getElementById("cajahospital");
+            let cajaapellido = document.getElementById("cajaapellido");
+            let cajaespecialidad = document.getElementById("cajaespecialidad");
+            let cajasalario = document.getElementById("cajasalario");
+
+            let nuevo = {
+                "idDoctor": parseInt(cajaid.value), 
+                "idHospital": parseInt(cajahospital.value),
+                "apellido": cajaapellido.value,
+                "especialidad": cajaespecialidad.value,
+                "salario": parseInt(cajasalario.value)
+            }
+            let request = url + "api/doctores";
+            //convertimos a json el objeto nuevo
+            let data = JSON.stringify(nuevo);
+            //realizamos la peticion
+            let response = await fetch(request, {
+                "method": "POST",
+                "body": data,
+                "headers": {
+                    "Content-type": "application/json"
+                }
+            })
+            cargarDoctores();
+        }
+        
+        async function cargarDoctores(){
+            //construimos la peticion
+            let request = url + "api/doctores";
+            //realizamos la peticion
+            let response = await fetch(request);
+            //convertimos los datos de respuesta a json
+            let datos = await response.json();
+            let filas = "";
+            //recorremos cada doctor de datos
+            for (let doctor of datos){
+                //dibujamos las filas de la tabla
+                filas += `
+                    <tr>
+                        <td> ${doctor.idDoctor} </td>
+                        <td> ${doctor.idHospital} </td>
+                        <td> ${doctor.apellido} </td>
+                        <td> ${doctor.especialidad} </td>
+                        <td> ${doctor.salario} </td>
+                    </tr>
+                `
+            }
+            //buscamos la tabla en html
+            let tabla = document.getElementById("tabladoctores");
+            tabla.innerHTML = filas;
+        }
+
+        async function modificarDoctor() {
+            let cajaid = document.getElementById("cajaid");
+            let cajahospital = document.getElementById("cajahospital");
+            let cajaapellido = document.getElementById("cajaapellido");
+            let cajaespecialidad = document.getElementById("cajaespecialidad");
+            let cajasalario = document.getElementById("cajasalario");
+
+            let nuevo = {
+                "idDoctor": parseInt(cajaid.value), 
+                "idHospital": parseInt(cajahospital.value),
+                "apellido": cajaapellido.value,
+                "especialidad": cajaespecialidad.value,
+                "salario": parseInt(cajasalario.value)
+            }
+            let request = url + "api/doctores";
+            //convertimos a json el objeto nuevo
+            let data = JSON.stringify(nuevo);
+            //realizamos la peticion
+            let response = await fetch(request, {
+                "method": "PUT",
+                "body": data,
+                "headers": {
+                    "Content-type": "application/json"
+                }
+            })
+            cargarDoctores();
+        }
+
+        async function eliminarDoctor() {
+            let cajaid = document.getElementById("cajaid");
+            let iddoctor = cajaid.value;
+            let request = url + "api/doctores/" + iddoctor;
+            let response = await fetch(request, {
+                "method": "DELETE"
+            })
+            cargarDoctores();
+        }
