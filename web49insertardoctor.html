@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="js/serviciodoctores.js"></script>
     <script>
         let url = "https://apicruddoctores.azurewebsites.net/";
         async function insertarDoctor() {
@@ -60,6 +61,44 @@
             tabla.innerHTML = filas;
         }
 
+        async function modificarDoctor() {
+            let cajaid = document.getElementById("cajaid");
+            let cajahospital = document.getElementById("cajahospital");
+            let cajaapellido = document.getElementById("cajaapellido");
+            let cajaespecialidad = document.getElementById("cajaespecialidad");
+            let cajasalario = document.getElementById("cajasalario");
+
+            let nuevo = {
+                "idDoctor": parseInt(cajaid.value), 
+                "idHospital": parseInt(cajahospital.value),
+                "apellido": cajaapellido.value,
+                "especialidad": cajaespecialidad.value,
+                "salario": parseInt(cajasalario.value)
+            }
+            let request = url + "api/doctores";
+            //convertimos a json el objeto nuevo
+            let data = JSON.stringify(nuevo);
+            //realizamos la peticion
+            let response = await fetch(request, {
+                "method": "PUT",
+                "body": data,
+                "headers": {
+                    "Content-type": "application/json"
+                }
+            })
+            cargarDoctores();
+        }
+
+        async function eliminarDoctor() {
+            let cajaid = document.getElementById("cajaid");
+            let iddoctor = cajaid.value;
+            let request = url + "api/doctores/" + iddoctor;
+            let response = await fetch(request, {
+                "method": "DELETE"
+            })
+            cargarDoctores();
+        }
+
         window.onload = function() {
             cargarDoctores();
         }
@@ -73,6 +112,8 @@
     Especialidad: <input type="text" id="cajaespecialidad"/><br/>
     Salario: <input type="number" id="cajasalario"/><br/>
     <button onclick="insertarDoctor()">Insertar doctor</button>
+    <button onclick="modificarDoctor()">Modificar doctor</button>
+    <button onclick="eliminarDoctor()">Eliminar doctor</button>
     <table id="tabladoctores" border="1"></table>
 </body>
 </html>
